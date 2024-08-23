@@ -5,7 +5,7 @@ import VCardList from '@/components/vCardList.vue'
 
 <template>
   <main class="h-screen w-full p-3 overflow-hidden main bg-no-repeat bg-center bg-cover">
-    <div class="max-w-[1200px] mx-auto flex overflow-hidden h-full">
+    <div class="max-w-[1200px] mx-auto flex h-full">
       <div class="w-1/3">
         <v-card-filter />
       </div>

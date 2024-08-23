@@ -13,3 +13,7 @@
     color: #342229;
     font-family: 'Noto Serif', serif;
 }
+
+.v-shadow {
+    box-shadow: 0 0 10px #ab9899;
+}

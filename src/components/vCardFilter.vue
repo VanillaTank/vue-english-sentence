@@ -65,17 +65,18 @@ const mainFilter = ref([
 </script>
 
 <template>
-  <div class="max-h-full overflow-auto border bg-white rounded p-2">
+  <div class="max-h-full overflow-auto border bg-white rounded p-2 v-shadow">
     <!-- MAIN FILTER -->
     <div class="p-2">
-      <h6 class="title mb-2">MAIN FILTER</h6>
+      <h6 class="font-light	mb-2">main filter</h6>
       <ul class="flex gap-2">
         <li
           v-for="item of mainFilter"
         >
           <RouterLink
             :to="item"
-            class="inline-block select-none cursor-pointer p-2 rounded bg-red-200 border border-red-300"
+            :active-class="'!bg-indigo-200 !border-indigo-300'"
+            class="uppercase inline-block select-none cursor-pointer p-2 rounded bg-red-200 border border-red-300"
           >
             {{item}}
           </RouterLink>
@@ -86,7 +87,7 @@ const mainFilter = ref([
 
     <!-- CARD FILTER -->
     <div class="border-b border-t border-red-300 p-2">
-      <h6 class="title mb-2">CARD FILTER</h6>
+      <h6 class="font-light	mb-2">card filter</h6>
       <div
         v-for="cardFilter in cardFilters"
         :key="cardFilter.id"
@@ -124,7 +125,7 @@ const mainFilter = ref([
 
     <!-- EXAMPLE FILTER -->
     <div class="p-2">
-      <h6 class="title mb-2">EXAMPLE FILTER</h6>
+      <h6 class="font-light mb-2">example filter</h6>
       <div
         v-for="filter in exampleFilters"
         :key="filter.id"
@@ -162,9 +163,6 @@ const mainFilter = ref([
 </template>
 
 <style scoped>
-.title {
-  font-size: 18px;
-  font-weight: lighter;
-}
+
 </style>
 
