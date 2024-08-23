@@ -17,3 +17,19 @@
 .v-shadow {
     box-shadow: 0 0 10px #ab9899;
 }
+
+.scroll-style::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+
+.scroll-style::-webkit-scrollbar-track {
+    box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.25) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+
+.scroll-pink::-webkit-scrollbar-thumb {
+    background-color: rgb(252 165 165);
+    border-radius: 10px;
+}

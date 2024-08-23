@@ -65,13 +65,14 @@ const mainFilter = ref([
 </script>
 
 <template>
-  <div class="max-h-full overflow-auto border bg-white rounded p-2 v-shadow">
+  <div class="max-h-full overflow-auto border bg-white rounded p-2 v-shadow scroll-style scroll-pink">
     <!-- MAIN FILTER -->
     <div class="p-2">
       <h6 class="font-light	mb-2">main filter</h6>
       <ul class="flex gap-2">
         <li
           v-for="item of mainFilter"
+          :key="item"
         >
           <RouterLink
             :to="item"
