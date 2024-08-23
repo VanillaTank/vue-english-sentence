@@ -5,40 +5,49 @@ import { useRoute } from 'vue-router'
 import { mainFilters, generalCardFilters, exampleFilter } from '@/data'
 import { useStore } from 'vuex'
 
+const store = useStore()
 const route = useRoute()
 const cardFilters = ref([])
 const exampleFilters = ref([])
 
+function formatFilter(filter) {
+  const options = filter.options.map(opt => ({
+    checked: false,
+    ...opt,
+  }))
+  return {
+    expanded: false,
+    selectedOptionAmount: 0,
+    options,
+    ...filter,
+  }
+}
+
+const updateSelectedMainFilter = (mainFilter) => {
+  return store.commit('updateSelectedMainFilter', mainFilter)
+}
+
+const updateSelectedCardFilters = (data) => {
+  return store.commit('updateSelectedCardFilters', data)
+}
+
+const updateSelectedExampleFilters = (data) => {
+  return store.commit('updateSelectedExampleFilters', data)
+}
+
 watch(
   () => route.name,
   (routeName) => {
-    exampleFilters.value = exampleFilter.map(item => {
-      const options = item.options.map(opt => ({
-        checked: false,
-        ...opt,
-      }))
-      return {
-        expanded: false,
-        selectedOptionAmount: 0,
-        options,
-        ...item,
-      }
-    })
     cardFilters.value = []
+    exampleFilters.value = []
 
     if (routeName === 'general') {
-      cardFilters.value = generalCardFilters.map(item => {
-        const options = item.options.map(opt => ({
-          checked: false,
-          ...opt,
-        }))
-        return {
-          expanded: false,
-          selectedOptionAmount: 0,
-          options,
-          ...item,
-        }
-      })
+      cardFilters.value = generalCardFilters.map(formatFilter)
+      exampleFilters.value = exampleFilter.map(formatFilter)
+      updateSelectedMainFilter('general')
+    }
+    if (routeName === 'conditional') {
+      updateSelectedMainFilter('conditional')
     }
   },
   {
@@ -46,7 +55,13 @@ watch(
   },
 )
 
-
+const onChange = (data, filterType) => {
+  if (filterType === 'card') {
+    updateSelectedCardFilters(data)
+  } else if (filterType === 'example') {
+    updateSelectedExampleFilters(data)
+  }
+}
 </script>
 
 <template>
@@ -81,6 +96,7 @@ watch(
         <v-filter
           :filter="filter"
           color="yellow"
+          @change="onChange($event, 'card')"
         />
       </div>
     </div>
@@ -96,6 +112,7 @@ watch(
         <v-filter
           :filter="filter"
           color="purple"
+          @change="onChange($event, 'example')"
         />
       </div>
     </div>

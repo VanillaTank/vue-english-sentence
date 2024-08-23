@@ -7,7 +7,7 @@ const props = defineProps({
 })
 const { filter, color } = toRefs(props)
 
-const emit = defineEmits(['select'])
+const emit = defineEmits(['change'])
 
 const colorDict = computed(() => {
   return {
@@ -28,11 +28,17 @@ const colorDict = computed(() => {
   }[color.value]
 })
 
+let selectedOptions = []
+
 const selectOption = (option, filter) => {
   option.checked = !option.checked
   filter.selectedOptionAmount = filter.options.filter(option => option.checked).length
-  emit('select', { filterId: filter.id, value: option.value })
-  // TODO сохранять выбранные фильтры в стор
+
+  option.checked
+    ? selectedOptions.push(option.value)
+    : selectedOptions = selectedOptions.filter(selectedOpt => selectedOpt !== option.value)
+
+  emit('change', { filterId: filter.id, value: selectedOptions })
 }
 
 </script>
