@@ -2,8 +2,8 @@
 import VFilter from '@/components/vFilter.vue'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { generalCardFilters } from '@/data'
-import { exampleFilter } from '@/data'
+import { mainFilters, generalCardFilters, exampleFilter } from '@/data'
+import { useStore } from 'vuex'
 
 const route = useRoute()
 const cardFilters = ref([])
@@ -46,13 +46,6 @@ watch(
   },
 )
 
-// TODO сохранять выбранные фильтры в стор
-
-
-const mainFilter = ref([
-  'general',
-  'conditional',
-])
 
 </script>
 
@@ -63,7 +56,7 @@ const mainFilter = ref([
       <h6 class="font-light	mb-2">main filter</h6>
       <ul class="flex gap-2">
         <li
-          v-for="item of mainFilter"
+          v-for="item of mainFilters"
           :key="item"
         >
           <RouterLink
@@ -71,7 +64,7 @@ const mainFilter = ref([
             :active-class="'!bg-indigo-200 !border-indigo-300'"
             class="uppercase inline-block select-none cursor-pointer px-2 py-1 rounded bg-red-200 border border-red-300"
           >
-            {{item}}
+            {{ item }}
           </RouterLink>
         </li>
       </ul>
