@@ -1,35 +1,47 @@
-# vue-english-sentence
+## TODO
 
-This template should help get you started developing with Vue 3 in Vite.
+- Подготовить данные примеры для active past simple
+- Сделать компоненту карточки
 
-## Recommended IDE Setup
+#### active past simple
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+| Regular   | + | - | ? |
+|-----------|---|---|---|
+| I         | ✅ | ✅ |   |
+| You       | ✅ | ✅ |   |
+| He/She/It | ✅ | ✅ |   |
+| We        | ✅ | ✅ |   |
+| They      | ✅ | ✅ |   |
 
-## Customize configuration
+| Irregular | + | - | ? |
+|-----------|---|---|---|
+| I         | ✅ | ✅ |   |
+| You       | ✅ | ✅ |   |
+| He/She/It | ✅ | ✅ |   |
+| We        | ✅ | ✅ |   |
+| They      | ✅ | ✅ |   |
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+| to be     | + | - | ? |
+|-----------|---|---|---|
+| I         |   |   |   |
+| You       |   |   |   |
+| He/She/It |   |   |   |
+| We        |   |   |   |
+| They      |   |   |   |
 
-## Project Setup
+| to do     | + | - | ? |
+|-----------|---|---|---|
+| I         |   |   |   |
+| You       |   |   |   |
+| He/She/It |   |   |   |
+| We        |   |   |   |
+| They      |   |   |   |
 
-```sh
-npm install
-```
+| to have   | + | - | ? |
+|-----------|---|---|---|
+| I         |   |   |   |
+| You       |   |   |   |
+| He/She/It |   |   |   |
+| We        |   |   |   |
+| They      |   |   |   |
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
