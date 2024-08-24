@@ -9,7 +9,9 @@ import VCardList from '@/components/vCardList.vue'
       <div class="w-1/3">
         <v-card-filter />
       </div>
-      <v-card-list />
+      <div class="w-2/3">
+        <v-card-list />
+      </div>
     </div>
   </main>
 </template>

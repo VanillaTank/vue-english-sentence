@@ -1,4 +1,19 @@
 import { createStore } from 'vuex'
+import activePastSimple from '@/data/generalData/ActivePastSimple'
+import activePresentSimple from '@/data/generalData/ActivePresentSimple'
+
+const generalCards = [
+  normalizeCardData(activePastSimple),
+  normalizeCardData(activePresentSimple),
+]
+
+function normalizeCardData (card) {
+  const examples = card.examples.map(example => example.show = true)
+  return {
+    examples,
+    ...card,
+  }
+}
 
 export default createStore({
   state() {
@@ -11,6 +26,10 @@ export default createStore({
   mutations: {
     updateSelectedMainFilter(state, payload) {
       state.selectedMainFilter = payload
+
+      if (payload === 'general') {
+        state.selectedCards = generalCards
+      }
     },
     updateSelectedCardFilters(state, payload) {
       state.selectedCardFilters[payload.filterId] = payload.value

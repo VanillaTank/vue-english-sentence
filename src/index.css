@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .card__sub-title {
+        @apply text-lg mt-3.5 mb-1.5;
+    }
+}
+
 *,
 *::after,
 *::before {
