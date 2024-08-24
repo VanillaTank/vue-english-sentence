@@ -29,10 +29,15 @@
     height: 10px;
 }
 
+.scroll-style::-webkit-scrollbar-thumb {
+    cursor: pointer;
+}
+
 .scroll-style::-webkit-scrollbar-track {
     box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.25) inset;
     background-color: #f9f9fd;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .scroll-pink::-webkit-scrollbar-thumb {
