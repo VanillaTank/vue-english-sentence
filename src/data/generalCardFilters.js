@@ -5,7 +5,7 @@ export default [
     options: [
       { label: 'Past', value: 'past' },
       { label: 'Present', value: 'present' },
-      { label: 'Future', value: 'future' },
+      // { label: 'Future', value: 'future' },
       // { label: 'Future-in-the-Past', value: 'futureInThePast' },
     ],
   },
@@ -14,9 +14,9 @@ export default [
     id: 'timeType',
     options: [
       { label: 'Simple', value: 'simple' },
-      { label: 'Continuous', value: 'continuous' },
-      { label: 'Perfect', value: 'perfect' },
-      { label: 'Perfect Continuous', value: 'perfectContinuous' },
+      // { label: 'Continuous', value: 'continuous' },
+      // { label: 'Perfect', value: 'perfect' },
+      // { label: 'Perfect Continuous', value: 'perfectContinuous' },
     ],
   },
   {
@@ -24,7 +24,7 @@ export default [
     id: 'voice',
     options: [
       { label: 'Active', value: 'active' },
-      { label: 'Passive', value: 'passive' },
+      // { label: 'Passive', value: 'passive' },
     ],
   },
 ]

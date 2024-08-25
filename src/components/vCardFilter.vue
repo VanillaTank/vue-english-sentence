@@ -14,7 +14,7 @@ function formatFilter(filter) {
     ...opt,
   }))
   return {
-    expanded: false,
+    expanded: true,
     selectedOptionAmount: 0,
     options,
     ...filter,
@@ -29,7 +29,12 @@ const updateSelectedExampleFilters = (data) => {
   return store.commit('updateSelectedExampleFilters', data)
 }
 
+const cardFiltersModel = ref({})
+const exampleFiltersModel = ref({})
+
 const selectedMainFilter = computed(() => store.state.selectedMainFilter)
+const selectedCardFilters = computed(() => store.state.selectedCardFilters)
+const selectedExampleFilters = computed(() => store.state.selectedExampleFilters)
 watch(
   selectedMainFilter,
   (newVal) => {
@@ -38,8 +43,12 @@ watch(
 
     if (newVal === 'general') {
       cardFilters.value = generalCardFilters.map(formatFilter)
+      cardFiltersModel.value = setFiltersModel(cardFilters.value, selectedCardFilters.value)
+
       exampleFilters.value = exampleFilter.map(formatFilter)
+      exampleFiltersModel.value = setFiltersModel(exampleFilters.value, selectedExampleFilters.value)
     }
+
     if (newVal === 'conditional') {
       // todo
     }
@@ -49,13 +58,17 @@ watch(
   },
 )
 
-const onChange = (data, filterType) => {
-  if (filterType === 'card') {
-    updateSelectedCardFilters(data)
-  } else if (filterType === 'example') {
-    updateSelectedExampleFilters(data)
-  }
+function setFiltersModel (filters, selectedFilters) {
+  const preparedFiltersModel = {}
+  filters.forEach(filter => {
+    preparedFiltersModel[filter.id] = selectedFilters[filter.id] || [];
+  });
+  return preparedFiltersModel
 }
+
+watch(cardFiltersModel, (newVal) => { updateSelectedCardFilters(newVal)}, { deep: true })
+watch(exampleFiltersModel, (newVal) => { updateSelectedExampleFilters(newVal)}, { deep: true })
+
 </script>
 
 <template>
@@ -88,9 +101,9 @@ const onChange = (data, filterType) => {
         class="mb-3"
       >
         <v-filter
-          :filter="filter"
+          v-model="cardFiltersModel[filter.id]"
           color="yellow"
-          @change="onChange($event, 'card')"
+          :filter="filter"
         />
       </div>
     </div>
@@ -104,16 +117,11 @@ const onChange = (data, filterType) => {
         class="mb-3"
       >
         <v-filter
-          :filter="filter"
+          v-model="exampleFiltersModel[filter.id]"
           color="purple"
-          @change="onChange($event, 'example')"
+          :filter="filter"
         />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>
-

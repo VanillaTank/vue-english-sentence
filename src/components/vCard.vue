@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, toRefs } from 'vue'
+import { ref, toRefs } from 'vue'
 
 const props = defineProps({
   card: { type: Object },
@@ -7,36 +7,35 @@ const props = defineProps({
 const { card } = toRefs(props)
 
 const showFullTheory = ref(false)
-
-const notExamples = computed(() => {
-  return card.value.examples.every(example => !example.show)
-})
 </script>
 
 <template>
-  <div class="border bg-white rounded p-4 v-shadow card">
+  <div
+    v-if="card.show"
+    class="border bg-white rounded p-4 v-shadow card"
+  >
     <h3 class="text-center text-2xl">{{ card.title }}</h3>
 
     <div class="flex items-baseline">
       <h4 class="card__sub-title grow">THEORY</h4>
-      <div
+      <span
         v-if="showFullTheory"
         class="cursor-pointer text-sm ml-4"
         @click="showFullTheory = false"
       >Свернуть
-      </div>
+      </span>
     </div>
     <div
       v-html="card.theory"
-      class="leading-7 overflow-hidden text-sm theory"
-      :class="[showFullTheory ? 'max-h-full' : 'max-h-16 opacity-80']"
+      class="leading-7 overflow-hidden text-sm theory text-[#726068]"
+      :class="[showFullTheory ? 'max-h-full' : 'max-h-14']"
     ></div>
-    <div
+    <span
       class="cursor-pointer text-sm"
       @click="showFullTheory = !showFullTheory"
     >
       {{ showFullTheory ? 'Свернуть...' : 'Развернуть...' }}
-    </div>
+    </span>
 
     <h4 class="card__sub-title">SCHEMAS</h4>
     <p
@@ -67,7 +66,7 @@ const notExamples = computed(() => {
     </div>
 
     <div
-      v-if="notExamples"
+      v-if="card.examples.every(example => !example.show)"
       class="text-sm text-gray-800"
     >
       Нет примеров для выбранных фильтров. Попробуйте выбрать другие варианты.
@@ -77,5 +76,7 @@ const notExamples = computed(() => {
 </template>
 
 <style scoped>
-
+.theory * {
+  color: inherit;
+}
 </style>

@@ -16,9 +16,9 @@ export default [
     options: [
       { label: 'Regular', value: 'regular' },
       { label: 'Irregular', value: 'irregular' },
-      { label: 'To do', value: 'toDo' },
-      { label: 'To have', value: 'toHave' },
-      { label: 'To be', value: 'toBe' },
+      // { label: 'To do', value: 'toDo' },
+      // { label: 'To have', value: 'toHave' },
+      // { label: 'To be', value: 'toBe' },
     ],
   },
   {

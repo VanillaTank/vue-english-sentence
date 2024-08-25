@@ -19,8 +19,8 @@ const router = createRouter({
   ]
 })
 
-router.afterEach((to) => {
-  store.commit('updateSelectedMainFilter', to.name)
+router.beforeEach((to) => {
+  store.dispatch('updateSelectedMainFilter', to.name)
 })
 
 export default router

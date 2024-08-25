@@ -1,13 +1,14 @@
 <script setup>
-import { computed, toRefs } from 'vue'
+import { ref, computed, toRefs, watch } from 'vue'
 
 const props = defineProps({
   filter: { type: Object },
   color: { type: String },
+  modelValue: { type: Object },
 })
-const { filter, color } = toRefs(props)
+const { filter, color, modelValue } = toRefs(props)
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change', 'update:modelValue'])
 
 const colors = {
   yellow: {
@@ -29,16 +30,30 @@ const colors = {
 }
 const colorDict = computed(() => colors[color.value])
 
-const selectOption = (option, filter) => {
-  option.checked = !option.checked
-  filter.selectedOptionAmount = filter.options.filter(option => option.checked).length
+const selectedOptions = ref([])
 
-  option.checked
-    ? selectedOptions.push(option.value)
-    : selectedOptions = selectedOptions.filter(selectedOpt => selectedOpt !== option.value)
+const selectOption = (option) => {
+  const index = selectedOptions.value.indexOf(option.value)
+  index === -1
+    ? selectedOptions.value.push(option.value)
+    : selectedOptions.value.splice(index, 1)
 
-  emit('change', { filterId: filter.id, value: selectedOptions })
+  emit('update:modelValue', selectedOptions.value)
 }
+
+watch(modelValue, (value) => {
+  const clonedOptions = JSON.parse(JSON.stringify(filter.value.options))
+
+  clonedOptions.forEach((option) => {
+    option.checked = value.includes(option.value)
+  })
+
+  filter.value.options = clonedOptions
+  filter.value.selectedOptionAmount = value.length
+  selectedOptions.value = JSON.parse(JSON.stringify(value))
+}, {
+  immediate: true
+})
 
 </script>
 
@@ -46,15 +61,15 @@ const selectOption = (option, filter) => {
   <div
     class="select-none cursor-pointer px-2 py-1 rounded border"
     :class="[colorDict.headBg, colorDict.headBorder]"
-    @click="filter.expanded = !filter.expanded"
+    @click.stop="filter.expanded = !filter.expanded"
   >
     {{ filter.title }}
     <span
       v-if="filter.selectedOptionAmount"
       class="opacity-80"
     >
-            ({{ filter.selectedOptionAmount }})
-          </span>
+      ({{ filter.selectedOptionAmount }})
+    </span>
   </div>
   <ul
     v-if="filter.expanded"
