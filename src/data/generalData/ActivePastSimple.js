@@ -1,5 +1,6 @@
 export default {
   title: 'ACTIVE PAST SIMPLE',
+  id: 'active-past-simple',
   cardFilter: {
     time: 'past',
     timeType: 'simple',

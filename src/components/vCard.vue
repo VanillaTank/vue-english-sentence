@@ -69,7 +69,7 @@ const showFullTheory = ref(false)
       v-if="card.examples.every(example => !example.show)"
       class="text-sm text-gray-800"
     >
-      Нет примеров для выбранных фильтров. Попробуйте выбрать другие варианты.
+      Нет примеров для выбранного сочетания фильтров. Попробуйте выбрать другие варианты.
     </div>
 
   </div>

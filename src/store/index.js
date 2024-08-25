@@ -12,7 +12,7 @@ export default createStore({
     return {
       selectedMainFilter: 'general', // 'general', 'conditional'
       selectedCardFilters: { time: ['past'], timeType: ['simple'], voice: ['active'] },
-      selectedExampleFilters: { pronoun: ['I'], verb: ['regular'], sentenceType: ['statement'] },
+      selectedExampleFilters: { pronoun: ['I', 'heSheIt'], verb: ['regular'], sentenceType: ['statement'] },
 
       fullCardByMainFilter: [],
       selectedCards: [],
@@ -59,6 +59,12 @@ export default createStore({
       }
 
       const filtersKeys = Object.keys(state.selectedExampleFilters)
+
+      if (!filtersKeys.length || Object.values(state.selectedExampleFilters).every(arr => !arr.length)) {
+        state.selectedCards.forEach(card => card.examples.forEach(example => example.show = false))
+        return
+      }
+
       state.selectedCards.forEach((card) => {
         if (card.show) {
           card.examples.forEach((example) => {
