@@ -1,10 +1,10 @@
 import { createStore } from 'vuex'
 import activePastSimple from '@/data/generalData/ActivePastSimple'
-import activePresentSimple from '@/data/generalData/ActivePresentSimple'
+// import activePresentSimple from '@/data/generalData/ActivePresentSimple'
 
 const generalCards = [
   normalizeCardData(activePastSimple),
-  normalizeCardData(activePresentSimple),
+  // normalizeCardData(activePresentSimple),
 ]
 
 function normalizeCardData (card) {
@@ -28,7 +28,10 @@ export default createStore({
       state.selectedMainFilter = payload
 
       if (payload === 'general') {
-        state.selectedCards = generalCards
+        state.selectedCards = structuredClone(generalCards)
+      }
+      else if (payload === 'conditional') {
+        state.selectedCards = []
       }
     },
     updateSelectedCardFilters(state, payload) {

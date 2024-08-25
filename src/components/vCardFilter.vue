@@ -1,12 +1,10 @@
 <script setup>
 import VFilter from '@/components/vFilter.vue'
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, ref, watch } from 'vue'
 import { mainFilters, generalCardFilters, exampleFilter } from '@/data'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const route = useRoute()
 const cardFilters = ref([])
 const exampleFilters = ref([])
 
@@ -23,10 +21,6 @@ function formatFilter(filter) {
   }
 }
 
-const updateSelectedMainFilter = (mainFilter) => {
-  return store.commit('updateSelectedMainFilter', mainFilter)
-}
-
 const updateSelectedCardFilters = (data) => {
   return store.commit('updateSelectedCardFilters', data)
 }
@@ -35,19 +29,19 @@ const updateSelectedExampleFilters = (data) => {
   return store.commit('updateSelectedExampleFilters', data)
 }
 
+const selectedMainFilter = computed(() => store.state.selectedMainFilter)
 watch(
-  () => route.name,
-  (routeName) => {
+  selectedMainFilter,
+  (newVal) => {
     cardFilters.value = []
     exampleFilters.value = []
 
-    if (routeName === 'general') {
+    if (newVal === 'general') {
       cardFilters.value = generalCardFilters.map(formatFilter)
       exampleFilters.value = exampleFilter.map(formatFilter)
-      updateSelectedMainFilter('general')
     }
-    if (routeName === 'conditional') {
-      updateSelectedMainFilter('conditional')
+    if (newVal === 'conditional') {
+      // todo
     }
   },
   {
