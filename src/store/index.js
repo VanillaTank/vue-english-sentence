@@ -11,20 +11,14 @@ export default createStore({
     }
   },
   actions: {
-    updateSelectedThemeFilter({ commit, dispatch, state }, payload) {
+    updateSelectedThemeFilter({ commit, dispatch }, payload) {
       commit('SET_SELECTED_THEME_FILTER', payload)
 
-      window.alert(`${payload}`)
-      commit('SET_SELECTED_CARDS', JSON.parse(JSON.stringify(timesCards)))
-
       if (payload === 'times') {
-        window.alert('payload === \'times\'')
-        commit('SET_SELECTED_CARDS', JSON.parse(JSON.stringify(timesCards)))
+        commit('SET_SELECTED_CARDS', timesCards)
       } else if (payload === 'conditional') {
         commit('SET_SELECTED_CARDS', [])
       }
-
-      window.alert(state.selectedCards.length)
 
       dispatch('updateSelectedCardFilters', null)
       dispatch('updateSelectedExampleFilters', null)
@@ -104,7 +98,6 @@ export default createStore({
       state.selectedExampleFilters[filterId] = data
     },
     SET_SELECTED_CARDS(state, payload) {
-      window.alert(`SET_SELECTED_CARDS, ${payload.length}`)
       state.selectedCards = payload
     },
   },
