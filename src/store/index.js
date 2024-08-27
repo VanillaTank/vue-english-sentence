@@ -12,7 +12,7 @@ export default createStore({
   },
   actions: {
     updateSelectedThemeFilter({ commit, dispatch, state }, payload) {
-      window.alert(`updateSelectedThemeFilter, ${payload}`)
+      window.alert(timesCards.length)
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       if (payload === 'times') {
@@ -101,6 +101,7 @@ export default createStore({
       state.selectedExampleFilters[filterId] = data
     },
     SET_SELECTED_CARDS(state, payload) {
+      window.alert(`SET_SELECTED_CARDS, ${payload.length}`)
       state.selectedCards = payload
     },
   },
