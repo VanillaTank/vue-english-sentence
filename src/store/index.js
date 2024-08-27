@@ -15,6 +15,8 @@ export default createStore({
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       window.alert(`${payload}`)
+      commit('SET_SELECTED_CARDS', structuredClone(timesCards))
+
       if (payload === 'times') {
         window.alert('payload === \'times\'')
         commit('SET_SELECTED_CARDS', structuredClone(timesCards))
