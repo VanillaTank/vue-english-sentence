@@ -2,7 +2,11 @@
 export default {
   purge: ['./index.html', './src/**/*.vue'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'soft-pink': '#f8f3f6',
+      }
+    },
   },
   plugins: [],
 }

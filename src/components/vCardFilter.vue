@@ -7,7 +7,7 @@ import { useStore } from 'vuex'
 const store = useStore()
 const cardFilters = ref([])
 const exampleFilters = ref([])
-const { mainFilters, generalCardFilters, exampleFilter } = filters;
+const { themeFilters, timesCardFilters, exampleFilter } = filters;
 
 function formatFilter(filter) {
   const options = filter.options.map(opt => ({
@@ -33,17 +33,17 @@ const updateSelectedExampleFilters = (data) => {
 const cardFiltersModel = ref({})
 const exampleFiltersModel = ref({})
 
-const selectedMainFilter = computed(() => store.state.selectedMainFilter)
+const selectedThemeFilter = computed(() => store.state.selectedThemeFilter)
 const selectedCardFilters = computed(() => store.state.selectedCardFilters)
 const selectedExampleFilters = computed(() => store.state.selectedExampleFilters)
 watch(
-  selectedMainFilter,
+  selectedThemeFilter,
   (newVal) => {
     cardFilters.value = []
     exampleFilters.value = []
 
-    if (newVal === 'general') {
-      cardFilters.value = generalCardFilters.map(formatFilter)
+    if (newVal === 'times') {
+      cardFilters.value = timesCardFilters.map(formatFilter)
       cardFiltersModel.value = setFiltersModel(cardFilters.value, selectedCardFilters.value)
 
       exampleFilters.value = exampleFilter.map(formatFilter)
@@ -73,13 +73,13 @@ watch(exampleFiltersModel, (newVal) => { updateSelectedExampleFilters(newVal)}, 
 </script>
 
 <template>
-  <div class="max-h-full overflow-auto border bg-white rounded p-2 v-shadow scroll-style scroll-pink">
-    <!-- MAIN FILTER -->
+  <div class="border bg-white rounded p-2 v-shadow">
+    <!-- THEME FILTER -->
     <div class="p-2">
-      <h6 class="font-light	mb-2">main filter</h6>
+      <h6 class="font-light	mb-2">theme filter</h6>
       <ul class="flex gap-2">
         <li
-          v-for="item of mainFilters"
+          v-for="item of themeFilters"
           :key="item"
         >
           <RouterLink

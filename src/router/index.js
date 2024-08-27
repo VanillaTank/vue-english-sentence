@@ -7,8 +7,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      alias: '/general',
-      name: 'general',
+      alias: '/times',
+      name: 'times',
       component: App,
     },
     {
@@ -20,7 +20,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  store.dispatch('updateSelectedMainFilter', to.name)
+  store.dispatch('updateSelectedThemeFilter', to.name)
 })
 
 export default router

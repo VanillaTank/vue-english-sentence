@@ -1,21 +1,21 @@
 import { createStore } from 'vuex'
-import { generalCards } from '@/data'
+import { timesCards } from '@/data'
 
 export default createStore({
   state() {
     return {
-      selectedMainFilter: 'general', // 'general', 'conditional'
+      selectedThemeFilter: 'times', // 'times', 'conditional'
       selectedCardFilters: { time: ['past'], timeType: ['continuous'], voice: ['active'] },
       selectedExampleFilters: { pronoun: ['I', 'heSheIt'], verb: ['regular'], sentenceType: ['statement'] },
       selectedCards: [],
     }
   },
   actions: {
-    updateSelectedMainFilter({ commit, dispatch }, payload) {
-      commit('SET_SELECTED_MAIN_FILTER', payload)
+    updateSelectedThemeFilter({ commit, dispatch }, payload) {
+      commit('SET_SELECTED_THEME_FILTER', payload)
 
-      if (payload === 'general') {
-        commit('SET_SELECTED_CARDS', structuredClone(generalCards))
+      if (payload === 'times') {
+        commit('SET_SELECTED_CARDS', structuredClone(timesCards))
       } else if (payload === 'conditional') {
         commit('SET_SELECTED_CARDS', [])
       }
@@ -88,8 +88,8 @@ export default createStore({
     },
   },
   mutations: {
-    SET_SELECTED_MAIN_FILTER(state, payload) {
-      state.selectedMainFilter = payload
+    SET_SELECTED_THEME_FILTER(state, payload) {
+      state.selectedThemeFilter = payload
     },
     SET_SELECTED_CARD_FILTER(state, { filterId, data }) {
       state.selectedCardFilters[filterId] = data

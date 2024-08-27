@@ -88,7 +88,7 @@ const ok = () => {
               </div>
 
               <!--  ФУТЕР  -->
-              <div class="bg-gray-100 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <div class="bg-soft-pink px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   :disabled="okDisabled"
                   type="button"

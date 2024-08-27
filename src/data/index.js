@@ -1,10 +1,10 @@
-import mainFilters from '@/data/filters/mainFilters'
-import generalCardFilters from '@/data/filters/generalCardFilters'
+import themeFilters from '@/data/filters/themeFilters'
+import timesCardFilters from '@/data/filters/timesCardFilters'
 import exampleFilter from '@/data/filters/exampleFilter'
 
 export const filters = {
-  mainFilters,
-  generalCardFilters,
+  themeFilters,
+  timesCardFilters,
   exampleFilter,
 }
 
@@ -13,7 +13,7 @@ import activePresentSimple from '@/data/cards/generalData/ActivePresentSimple'
 import activeFutureSimple from '@/data/cards/generalData/ActiveFutureSimple'
 import activePastContinuous from '@/data/cards/generalData/ActivePastContinuous.js'
 
-export const generalCards = [
+export const timesCards = [
   activePastSimple,
   activePresentSimple,
   activeFutureSimple,
