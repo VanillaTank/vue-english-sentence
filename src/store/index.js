@@ -15,11 +15,11 @@ export default createStore({
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       window.alert(`${payload}`)
-      commit('SET_SELECTED_CARDS', structuredClone(timesCards))
+      commit('SET_SELECTED_CARDS', JSON.parse(JSON.stringify(timesCards)))
 
       if (payload === 'times') {
         window.alert('payload === \'times\'')
-        commit('SET_SELECTED_CARDS', structuredClone(timesCards))
+        commit('SET_SELECTED_CARDS', JSON.parse(JSON.stringify(timesCards)))
       } else if (payload === 'conditional') {
         commit('SET_SELECTED_CARDS', [])
       }
