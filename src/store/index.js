@@ -11,7 +11,8 @@ export default createStore({
     }
   },
   actions: {
-    updateSelectedThemeFilter({ commit, dispatch }, payload) {
+    updateSelectedThemeFilter({ commit, dispatch, state }, payload) {
+      window.alert(`updateSelectedThemeFilter, ${payload}`)
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       if (payload === 'times') {
@@ -19,6 +20,8 @@ export default createStore({
       } else if (payload === 'conditional') {
         commit('SET_SELECTED_CARDS', [])
       }
+
+      window.alert(state.selectedCards.length)
 
       dispatch('updateSelectedCardFilters', null)
       dispatch('updateSelectedExampleFilters', null)
