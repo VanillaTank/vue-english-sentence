@@ -48,30 +48,30 @@ const showFullTheory = ref(false)
 
     <h4 class="card__sub-title">EXAMPLES</h4>
     <div
-      v-for="example of card.examples"
-      :key="Object.values(example.exampleFilter).join('-')"
-      class="mb-3.5"
-    >
-      <template v-if="example.show">
-        <div
-          v-for="(text, index) of example.texts"
-          :key="index"
-          class="mb-2"
-        >
-          <p>{{ text.en }}</p>
-          <p class="text-sm text-gray-800">{{ text.ru }}</p>
-          <p v-if="text.comment" class="comment">{{ text.comment }}</p>
-        </div>
-      </template>
-    </div>
-
-    <div
       v-if="card.examples.every(example => !example.show)"
       class="text-sm text-gray-800"
     >
       Нет примеров для выбранного сочетания фильтров. Попробуйте выбрать другие варианты.
     </div>
-
+    <template v-else>
+      <div
+        v-for="example of card.examples"
+        :key="Object.values(example.exampleFilter).join('-')"
+        class="mb-3.5"
+      >
+        <template v-if="example.show">
+          <div
+            v-for="(text, index) of example.texts"
+            :key="index"
+            class="mb-2"
+          >
+            <p>{{ text.en }}</p>
+            <p class="text-sm text-gray-800">{{ text.ru }}</p>
+            <p v-if="text.comment" class="comment">{{ text.comment }}</p>
+          </div>
+        </template>
+      </div>
+    </template>
   </div>
 </template>
 

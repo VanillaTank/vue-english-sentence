@@ -10,11 +10,19 @@ const cards = computed(() => store.state.selectedCards)
 
 <template>
   <div class="max-h-full overflow-auto rounded scroll-style scroll-pink pl-5 pr-2 flex flex-col gap-y-4">
-    <v-card
-      v-for="card in cards"
-      :key="Object.values(card.cardFilter).join('-')"
-      :card="card"
-    ></v-card>
+    <div
+      v-if="cards.every(card => !card.show)"
+      class="text-sm text-gray-800 border bg-white rounded p-4 v-shadow card"
+    >
+      Нет карточек для выбранного сочетания фильтров. Попробуйте выбрать другие варианты.
+    </div>
+    <template v-else>
+      <v-card
+        v-for="card in cards"
+        :key="Object.values(card.cardFilter).join('-')"
+        :card="card"
+      ></v-card>
+    </template>
   </div>
 </template>
 
