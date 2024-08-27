@@ -13,35 +13,32 @@ export default createStore({
       selectedMainFilter: 'general', // 'general', 'conditional'
       selectedCardFilters: { time: ['past'], timeType: ['simple'], voice: ['active'] },
       selectedExampleFilters: { pronoun: ['I', 'heSheIt'], verb: ['regular'], sentenceType: ['statement'] },
-
-      fullCardByMainFilter: [],
       selectedCards: [],
     }
   },
   actions: {
-    updateSelectedMainFilter({ commit, state }, payload) {
-      state.selectedMainFilter = payload
+    updateSelectedMainFilter({ commit, dispatch }, payload) {
+      commit('SET_SELECTED_MAIN_FILTER', payload)
 
       if (payload === 'general') {
-        state.selectedCards = structuredClone(generalCards)
+        commit('SET_SELECTED_CARDS', structuredClone(generalCards))
       } else if (payload === 'conditional') {
-        state.selectedCards = []
+        commit('SET_SELECTED_CARDS', [])
       }
 
-      commit('updateSelectedCardFilters', null)
-      commit('updateSelectedExampleFilters', null)
+      dispatch('updateSelectedCardFilters', null)
+      dispatch('updateSelectedExampleFilters', null)
     },
-  },
-  mutations: {
-    updateSelectedCardFilters(state, payload) {
+    updateSelectedCardFilters({ state, commit, dispatch }, payload) {
       if (payload) {
         Object.keys(payload).forEach((filterId) => {
-          state.selectedCardFilters[filterId] = payload[filterId]
+          commit('SET_SELECTED_CARD_FILTER', { filterId, data: payload[filterId] })
         })
       }
 
       const filtersKeys = Object.keys(state.selectedCardFilters)
       state.selectedCards.forEach(card => {
+        const prevShow = card.show
         card.show = filtersKeys.every(fKey => {
           // eslint-disable-next-line no-prototype-builtins
           if (state.selectedCardFilters[fKey].length) {
@@ -49,12 +46,15 @@ export default createStore({
           }
           return true
         })
+        if (card.show && !prevShow) {
+          dispatch('updateExamplesForCard',  { cardId: card.id })
+        }
       })
     },
-    updateSelectedExampleFilters(state, payload) {
+    updateSelectedExampleFilters({ state, commit }, payload) {
       if (payload) {
         Object.keys(payload).forEach((filterId) => {
-          state.selectedExampleFilters[filterId] = payload[filterId]
+          commit('SET_SELECTED_EXAMPLE_FILTER', { filterId, data: payload[filterId] })
         })
       }
 
@@ -68,15 +68,43 @@ export default createStore({
       state.selectedCards.forEach((card) => {
         if (card.show) {
           card.examples.forEach((example) => {
-            example.show = filtersKeys.every(fKey => {
-              if (state.selectedExampleFilters[fKey].length) {
-                return state.selectedExampleFilters[fKey].includes(example.exampleFilter[fKey])
-              }
-              return true
+              example.show = filtersKeys.every(fKey => {
+                if (state.selectedExampleFilters[fKey].length) {
+                  return state.selectedExampleFilters[fKey].includes(example.exampleFilter[fKey])
+                }
+                return true
+              })
             })
-          })
         }
       })
+    },
+    updateExamplesForCard({ state }, { cardId }) {
+      const filtersKeys = Object.keys(state.selectedExampleFilters)
+
+      state.selectedCards
+        .find(card => card.id === cardId).examples
+        .forEach((example) => {
+          example.show = filtersKeys.every(fKey => {
+            if (state.selectedExampleFilters[fKey].length) {
+              return state.selectedExampleFilters[fKey].includes(example.exampleFilter[fKey])
+            }
+            return true
+          })
+        })
+    },
+  },
+  mutations: {
+    SET_SELECTED_MAIN_FILTER(state, payload) {
+      state.selectedMainFilter = payload
+    },
+    SET_SELECTED_CARD_FILTER(state, { filterId, data }) {
+      state.selectedCardFilters[filterId] = data
+    },
+    SET_SELECTED_EXAMPLE_FILTER(state, { filterId, data }) {
+      state.selectedExampleFilters[filterId] = data
+    },
+    SET_SELECTED_CARDS(state, payload) {
+      state.selectedCards = payload
     },
   },
 })

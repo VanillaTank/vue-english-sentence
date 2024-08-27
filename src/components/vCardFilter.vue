@@ -22,11 +22,11 @@ function formatFilter(filter) {
 }
 
 const updateSelectedCardFilters = (data) => {
-  return store.commit('updateSelectedCardFilters', data)
+  return store.dispatch('updateSelectedCardFilters', data)
 }
 
 const updateSelectedExampleFilters = (data) => {
-  return store.commit('updateSelectedExampleFilters', data)
+  return store.dispatch('updateSelectedExampleFilters', data)
 }
 
 const cardFiltersModel = ref({})
