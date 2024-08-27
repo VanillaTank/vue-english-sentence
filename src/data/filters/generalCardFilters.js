@@ -14,7 +14,7 @@ export default [
     id: 'timeType',
     options: [
       { label: 'Simple', value: 'simple' },
-      // { label: 'Continuous', value: 'continuous' },
+      { label: 'Continuous', value: 'continuous' },
       // { label: 'Perfect', value: 'perfect' },
       // { label: 'Perfect Continuous', value: 'perfectContinuous' },
     ],

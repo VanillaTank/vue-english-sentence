@@ -11,9 +11,11 @@ export const filters = {
 import activePastSimple from '@/data/cards/generalData/ActivePastSimple'
 import activePresentSimple from '@/data/cards/generalData/ActivePresentSimple'
 import activeFutureSimple from '@/data/cards/generalData/ActiveFutureSimple'
+import activePastContinuous from '@/data/cards/generalData/ActivePastContinuous.js'
 
 export const generalCards = [
   activePastSimple,
   activePresentSimple,
   activeFutureSimple,
+  activePastContinuous,
 ]

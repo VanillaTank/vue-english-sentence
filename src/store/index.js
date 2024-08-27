@@ -5,7 +5,7 @@ export default createStore({
   state() {
     return {
       selectedMainFilter: 'general', // 'general', 'conditional'
-      selectedCardFilters: { time: ['past'], timeType: ['simple'], voice: ['active'] },
+      selectedCardFilters: { time: ['past'], timeType: ['continuous'], voice: ['active'] },
       selectedExampleFilters: { pronoun: ['I', 'heSheIt'], verb: ['regular'], sentenceType: ['statement'] },
       selectedCards: [],
     }
