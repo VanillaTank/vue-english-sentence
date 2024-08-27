@@ -1,10 +1,12 @@
 import { createStore } from 'vuex'
 import activePastSimple from '@/data/generalData/ActivePastSimple'
 import activePresentSimple from '@/data/generalData/ActivePresentSimple'
+import activeFutureSimple from '@/data/generalData/ActiveFutureSimple.js'
 
 const generalCards = [
   activePastSimple,
   activePresentSimple,
+  activeFutureSimple,
 ]
 
 export default createStore({

@@ -19,6 +19,7 @@ export default {
     'Did + subject + V1 ?',
   ],
   examples: [
+    // I
     {
       texts: [
         { en: 'I enjoy reading books.', ru: 'Я наслаждаюсь чтением книг.', comment: '' },
@@ -63,6 +64,7 @@ export default {
         sentenceType: 'negation',
       },
     },
+    // We
     {
       texts: [
         { en: 'We enjoy hiking on weekends.', ru: 'Мы наслаждаемся походами по выходным.', comment: '' },
@@ -111,6 +113,7 @@ export default {
         sentenceType: 'negation',
       },
     },
+    // You
     {
       texts: [
         { en: 'You play the guitar very well.', ru: 'Ты играешь на гитаре очень хорошо.', comment: '' },
@@ -159,6 +162,7 @@ export default {
         sentenceType: 'negation',
       },
     },
+    // heSheIt
     {
       texts: [
         { en: 'He enjoys running in the park.', ru: 'Он любит бегать в парке.', comment: '' },
@@ -207,6 +211,7 @@ export default {
         sentenceType: 'negation',
       },
     },
+    // They
     {
       texts: [
         { en: 'They enjoy going to the cinema.', ru: 'Они любят ходить в кино.', comment: '' },

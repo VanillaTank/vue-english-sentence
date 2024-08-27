@@ -5,7 +5,7 @@ export default [
     options: [
       { label: 'Past', value: 'past' },
       { label: 'Present', value: 'present' },
-      // { label: 'Future', value: 'future' },
+      { label: 'Future', value: 'future' },
       // { label: 'Future-in-the-Past', value: 'futureInThePast' },
     ],
   },
