@@ -17,9 +17,9 @@ export default {
 <br />
 <div>Таким образом, Active Past Continuous подчеркивает продолжительность и незавершенность действий в прошлом, их связь с другими событиями или действиями, и акцентирует внимание на процессе, а не на результате.</div>`,
   schemas: [
-    'Subject + was/were + Ving',
-    'Subject + was/were not + Ving',
-    'Was/were + subject + Ving ?',
+    'Subject + was/were + V-ing',
+    'Subject + was/were not + V-ing',
+    'Was/were + subject + V-ing ?',
   ],
   examples: [
     // I
