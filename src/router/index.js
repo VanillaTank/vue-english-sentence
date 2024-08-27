@@ -20,6 +20,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
+  window.alert(to.name)
   store.dispatch('updateSelectedThemeFilter', to.name)
 })
 
