@@ -1,12 +1,13 @@
 <script setup>
 import VFilter from '@/components/vFilter.vue'
 import { computed, ref, watch } from 'vue'
-import { mainFilters, generalCardFilters, exampleFilter } from '@/data'
+import { filters } from '@/data'
 import { useStore } from 'vuex'
 
 const store = useStore()
 const cardFilters = ref([])
 const exampleFilters = ref([])
+const { mainFilters, generalCardFilters, exampleFilter } = filters;
 
 function formatFilter(filter) {
   const options = filter.options.map(opt => ({
