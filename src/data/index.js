@@ -12,10 +12,17 @@ import activePastSimple from '@/data/cards/generalData/ActivePastSimple'
 import activePresentSimple from '@/data/cards/generalData/ActivePresentSimple'
 import activeFutureSimple from '@/data/cards/generalData/ActiveFutureSimple'
 import activePastContinuous from '@/data/cards/generalData/ActivePastContinuous.js'
+import activePresentContinuous from '@/data/cards/generalData/ActivePresentContinuous.js'
+import activeFutureContinuous from '@/data/cards/generalData/ActiveFutureContinuous.js'
 
 export const timesCards = [
+  // Simple
   activePastSimple,
   activePresentSimple,
   activeFutureSimple,
+
+  // Continuous
   activePastContinuous,
+  activePresentContinuous,
+  activeFutureContinuous,
 ]
