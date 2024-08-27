@@ -12,7 +12,6 @@ export default createStore({
   },
   actions: {
     updateSelectedThemeFilter({ commit, dispatch, state }, payload) {
-      window.alert(timesCards.length)
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       if (payload === 'times') {
@@ -92,6 +91,7 @@ export default createStore({
   },
   mutations: {
     SET_SELECTED_THEME_FILTER(state, payload) {
+      window.alert(`SET_SELECTED_THEME_FILTER, ${payload}`)
       state.selectedThemeFilter = payload
     },
     SET_SELECTED_CARD_FILTER(state, { filterId, data }) {
