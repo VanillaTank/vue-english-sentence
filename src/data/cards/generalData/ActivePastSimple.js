@@ -14,7 +14,7 @@ export default {
 <b> - Единичные, завершенные действия в прошлом.</b>
 <div>Эти действия произошли в конкретный момент в прошлом и больше не повторяются.</div>
 <br>
-<div style="text-transform:uppercase">Ключевые маркеры времени для Past Simple</div>
+<div style="text-transform:uppercase">Ключевые маркеры времени</div>
 <div>
   <b> - yesterday (вчера)</b>: Указывает на действия, произошедшие накануне. <i>I met him yesterday.</i>
 </div>
