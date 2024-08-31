@@ -17,6 +17,7 @@ import activeFutureContinuous from '@/data/cards/generalData/ActiveFutureContinu
 import activePastPerfect from '@/data/cards/generalData/ActivePastPerfect.js'
 import activePresentPerfect from '@/data/cards/generalData/ActivePresentPerfect.js'
 import activeFuturePerfect from '@/data/cards/generalData/ActiveFuturePerfect.js'
+import activePastPerfectContinuous from '@/data/cards/generalData/ActivePastPerfectContinuous.js'
 
 export const timesCards = [
   // Simple
@@ -33,4 +34,7 @@ export const timesCards = [
   activePastPerfect,
   activePresentPerfect,
   activeFuturePerfect,
+
+  // Prefect Continuous
+  activePastPerfectContinuous,
 ]
