@@ -16,7 +16,7 @@ export default [
       { label: 'Simple', value: 'simple' },
       { label: 'Continuous', value: 'continuous' },
       { label: 'Perfect', value: 'perfect' },
-      // { label: 'Perfect Continuous', value: 'perfectContinuous' },
+      { label: 'Perfect Continuous', value: 'perfectContinuous' },
     ],
   },
   {
