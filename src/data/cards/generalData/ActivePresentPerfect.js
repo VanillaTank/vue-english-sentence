@@ -21,7 +21,12 @@ export default {
 <div>Когда именно, не уточняется, важно само событие.</div>
 <br/>
 <div style="text-transform:uppercase">Ключевые маркеры времени</div>
-<div>Since, for, ever, never, just, already, yet, recently.</div>`,
+<div>Since, for, ever, never, just, already, yet, recently.</div>
+<br/>
+<div>Отличие от Past Simple</div>
+<div>Present Perfect используется для акцентирования на результате в настоящем, тогда как Past Simple описывает действия, которые произошли в прошлом и не имеют прямой связи с настоящим. Например:</div>
+<div>"I have lost my keys." (Я потерял свои ключи. — они все еще потеряны, и это важно сейчас.)<div>
+<div>"I lost my keys yesterday." (Я потерял свои ключи вчера. — факт произошел в прошлом, и акцент на времени действия.)</div>`,
   schemas: [
     'Subject + have/has + V3', 'Subject + have/has not + V3', 'Have/has + subject + V3 ?',
   ],
