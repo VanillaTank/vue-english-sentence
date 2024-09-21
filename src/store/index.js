@@ -27,14 +27,16 @@ export default createStore({
       // todo Проверить, есть ли сохраненные в в рантайме фильтры, потом - локал сторадже фильтры.
       //  Если нет - использовать дефолтные
 
-      dispatch('updateSelectedCardFilters', selectedThemeFilter.selectedFiltersByDefault.selectedCardFilters)
-      dispatch('updateSelectedExampleFilters', selectedThemeFilter.selectedFiltersByDefault.selectedExampleFilters)
+      dispatch('updateSelectedCardFilters', { filters: selectedThemeFilter.selectedFiltersByDefault.selectedCardFilters, full: true })
+      dispatch('updateSelectedExampleFilters', {  filters: selectedThemeFilter.selectedFiltersByDefault.selectedExampleFilters, full: true })
     },
-    updateSelectedCardFilters({ state, commit, dispatch }, payload) {
-      if (payload) {
-        Object.keys(payload).forEach((filterId) => {
-          commit('SET_SELECTED_CARD_FILTER', { filterId, data: payload[filterId] })
+    updateSelectedCardFilters({ state, commit, dispatch }, { filters, full = false }) {
+      if (!full) {
+        Object.keys(filters).forEach((filterId) => {
+          commit('SET_SELECTED_CARD_FILTER', { filterId, data: filters[filterId] })
         })
+      } else {
+        commit('SET_FULL_CARD_FILTER', filters)
       }
 
       const filtersKeys = Object.keys(state.selectedCardFilters)
@@ -52,11 +54,13 @@ export default createStore({
         }
       })
     },
-    updateSelectedExampleFilters({ state, commit }, payload) {
-      if (payload) {
-        Object.keys(payload).forEach((filterId) => {
-          commit('SET_SELECTED_EXAMPLE_FILTER', { filterId, data: payload[filterId] })
+    updateSelectedExampleFilters({ state, commit }, { filters, full = false }) {
+      if (!full) {
+        Object.keys(filters).forEach((filterId) => {
+          commit('SET_SELECTED_EXAMPLE_FILTER', { filterId, data: filters[filterId] })
         })
+      } else {
+        commit('SET_FULL_EXAMPLE_FILTER', filters)
       }
 
       const filtersKeys = Object.keys(state.selectedExampleFilters)
@@ -106,6 +110,12 @@ export default createStore({
     },
     SET_SELECTED_CARDS(state, payload) {
       state.selectedCards = payload
+    },
+    SET_FULL_CARD_FILTER (state, payload) {
+      state.selectedCardFilters = payload
+    },
+    SET_FULL_EXAMPLE_FILTER (state, payload) {
+      state.selectedExampleFilters = payload
     },
   },
 })

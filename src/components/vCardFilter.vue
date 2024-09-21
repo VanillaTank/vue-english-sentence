@@ -23,11 +23,11 @@ function formatFilter(filter) {
 }
 
 const updateSelectedCardFilters = (data) => {
-  return store.dispatch('updateSelectedCardFilters', data)
+  return store.dispatch('updateSelectedCardFilters', { filters: data })
 }
 
 const updateSelectedExampleFilters = (data) => {
-  return store.dispatch('updateSelectedExampleFilters', data)
+  return store.dispatch('updateSelectedExampleFilters', { filters: data })
 }
 
 const cardFiltersModel = ref({})
