@@ -23,19 +23,19 @@ function formatFilter(filter) {
 }
 
 const updateSelectedCardFilters = (data) => {
-  return store.dispatch('updateSelectedCardFilters', { filters: data })
+  return store.dispatch('updateSelectedCardFilters', data)
 }
 
 const updateSelectedExampleFilters = (data) => {
-  return store.dispatch('updateSelectedExampleFilters', { filters: data })
+  return store.dispatch('updateSelectedExampleFilters', data)
 }
 
 const cardFiltersModel = ref({})
 const exampleFiltersModel = ref({})
 
 const selectedThemeFilter = computed(() => store.state.selectedThemeFilter)
-const selectedCardFilters = computed(() => store.state.selectedCardFilters)
-const selectedExampleFilters = computed(() => store.state.selectedExampleFilters)
+const initCard = ref(false)
+const initExample = ref(false)
 watch(
   selectedThemeFilter,
   (newVal) => {
@@ -52,11 +52,13 @@ watch(
       exampleFilters.value = exampleFilter.map(formatFilter)
     }
 
-    cardFiltersModel.value = setFiltersModel(cardFilters.value, selectedCardFilters.value)
-    exampleFiltersModel.value = setFiltersModel(exampleFilters.value, selectedExampleFilters.value)
-  },
-  {
-    immediate: true,
+    // todo Проверить, есть ли сохраненные в в рантайме фильтры, потом - локал сторадже фильтры.
+    //  Если нет - использовать дефолтные
+    const selectedFiltersByDefault = themeFilters.find(theme => theme.title === selectedThemeFilter.value).selectedFiltersByDefault
+    cardFiltersModel.value = setFiltersModel(cardFilters.value, selectedFiltersByDefault.selectedCardFilters)
+    exampleFiltersModel.value = setFiltersModel(exampleFilters.value, selectedFiltersByDefault.selectedExampleFilters)
+    initCard.value = true
+    initExample.value = true
   },
 )
 
@@ -69,8 +71,14 @@ function setFiltersModel (filters, selectedFilters) {
   return preparedFiltersModel
 }
 
-watch(cardFiltersModel, (newVal) => { updateSelectedCardFilters(newVal)}, { deep: true })
-watch(exampleFiltersModel, (newVal) => { updateSelectedExampleFilters(newVal)}, { deep: true })
+watch(cardFiltersModel, (newVal) => {
+  updateSelectedCardFilters({ filters: newVal, full: initCard.value })
+  initCard.value = false
+}, { deep: true })
+watch(exampleFiltersModel, (newVal) => {
+  updateSelectedExampleFilters({ filters: newVal, full: initExample.value })
+  initExample.value = false
+}, { deep: true })
 
 </script>
 

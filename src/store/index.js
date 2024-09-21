@@ -13,7 +13,7 @@ export default createStore({
     }
   },
   actions: {
-    updateSelectedThemeFilter({ commit, dispatch }, payload) {
+    updateSelectedThemeFilter({ commit }, payload) {
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       const selectedThemeFilter = themeFilters.find(theme => theme.title === payload)
@@ -23,12 +23,6 @@ export default createStore({
       else if (selectedThemeFilter.title === 'conditional') { fullThemeCards = JSON.parse(JSON.stringify(conditionalCards)) }
 
       commit('SET_SELECTED_CARDS', fullThemeCards)
-
-      // todo Проверить, есть ли сохраненные в в рантайме фильтры, потом - локал сторадже фильтры.
-      //  Если нет - использовать дефолтные
-
-      dispatch('updateSelectedCardFilters', { filters: selectedThemeFilter.selectedFiltersByDefault.selectedCardFilters, full: true })
-      dispatch('updateSelectedExampleFilters', {  filters: selectedThemeFilter.selectedFiltersByDefault.selectedExampleFilters, full: true })
     },
     updateSelectedCardFilters({ state, commit, dispatch }, { filters, full = false }) {
       if (!full) {
