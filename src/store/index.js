@@ -1,12 +1,14 @@
 import { createStore } from 'vuex'
-import { timesCards } from '@/data'
+import { timesCards, conditionalCards, filters } from '@/data'
+
+const { themeFilters } = filters
 
 export default createStore({
   state() {
     return {
-      selectedThemeFilter: 'times', // 'times', 'conditional'
-      selectedCardFilters: { time: ['past'], timeType: ['continuous'], voice: ['active'] },
-      selectedExampleFilters: { pronoun: ['I', 'heSheIt'], verb: ['regular'], sentenceType: ['statement'] },
+      selectedThemeFilter: '', // 'times', 'conditional'
+      selectedCardFilters: {},
+      selectedExampleFilters: {},
       selectedCards: [],
     }
   },
@@ -14,14 +16,19 @@ export default createStore({
     updateSelectedThemeFilter({ commit, dispatch }, payload) {
       commit('SET_SELECTED_THEME_FILTER', payload)
 
-      if (payload === 'times') {
-        commit('SET_SELECTED_CARDS', JSON.parse(JSON.stringify(timesCards)))
-      } else if (payload === 'conditional') {
-        commit('SET_SELECTED_CARDS', [])
-      }
+      const selectedThemeFilter = themeFilters.find(theme => theme.title === payload)
 
-      dispatch('updateSelectedCardFilters', null)
-      dispatch('updateSelectedExampleFilters', null)
+      let fullThemeCards
+      if (selectedThemeFilter.title === 'times') { fullThemeCards = JSON.parse(JSON.stringify(timesCards)) }
+      else if (selectedThemeFilter.title === 'conditional') { fullThemeCards = JSON.parse(JSON.stringify(conditionalCards)) }
+
+      commit('SET_SELECTED_CARDS', fullThemeCards)
+
+      // todo Проверить, есть ли сохраненные в в рантайме фильтры, потом - локал сторадже фильтры.
+      //  Если нет - использовать дефолтные
+
+      dispatch('updateSelectedCardFilters', selectedThemeFilter.selectedFiltersByDefault.selectedCardFilters)
+      dispatch('updateSelectedExampleFilters', selectedThemeFilter.selectedFiltersByDefault.selectedExampleFilters)
     },
     updateSelectedCardFilters({ state, commit, dispatch }, payload) {
       if (payload) {

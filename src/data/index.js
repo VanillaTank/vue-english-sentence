@@ -1,10 +1,12 @@
 import themeFilters from '@/data/filters/themeFilters'
 import timesCardFilters from '@/data/filters/timesCardFilters'
+import conditionalCardFilters from '@/data/filters/conditionalCardFilters'
 import exampleFilter from '@/data/filters/exampleFilter'
 
 export const filters = {
   themeFilters,
   timesCardFilters,
+  conditionalCardFilters,
   exampleFilter,
 }
 
@@ -41,4 +43,8 @@ export const timesCards = [
   activePastPerfectContinuous,
   activePresentPerfectContinuous,
   activeFuturePerfectContinuous,
+]
+
+export const conditionalCards = [
+
 ]

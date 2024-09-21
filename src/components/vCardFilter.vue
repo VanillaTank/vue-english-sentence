@@ -7,7 +7,7 @@ import { useStore } from 'vuex'
 const store = useStore()
 const cardFilters = ref([])
 const exampleFilters = ref([])
-const { themeFilters, timesCardFilters, exampleFilter } = filters;
+const { themeFilters, timesCardFilters, conditionalCardFilters, exampleFilter } = filters;
 
 function formatFilter(filter) {
   const options = filter.options.map(opt => ({
@@ -15,10 +15,10 @@ function formatFilter(filter) {
     ...opt,
   }))
   return {
-    expanded: true,
+    ...filter,
+    expanded: true, // todo Развернуть те, которые выбраны по дефолту
     selectedOptionAmount: 0,
     options,
-    ...filter,
   }
 }
 
@@ -44,15 +44,16 @@ watch(
 
     if (newVal === 'times') {
       cardFilters.value = timesCardFilters.map(formatFilter)
-      cardFiltersModel.value = setFiltersModel(cardFilters.value, selectedCardFilters.value)
-
       exampleFilters.value = exampleFilter.map(formatFilter)
-      exampleFiltersModel.value = setFiltersModel(exampleFilters.value, selectedExampleFilters.value)
     }
 
     if (newVal === 'conditional') {
-      // todo
+      cardFilters.value = conditionalCardFilters.map(formatFilter)
+      exampleFilters.value = exampleFilter.map(formatFilter)
     }
+
+    cardFiltersModel.value = setFiltersModel(cardFilters.value, selectedCardFilters.value)
+    exampleFiltersModel.value = setFiltersModel(exampleFilters.value, selectedExampleFilters.value)
   },
   {
     immediate: true,
@@ -61,6 +62,7 @@ watch(
 
 function setFiltersModel (filters, selectedFilters) {
   const preparedFiltersModel = {}
+
   filters.forEach(filter => {
     preparedFiltersModel[filter.id] = selectedFilters[filter.id] || [];
   });
@@ -80,14 +82,14 @@ watch(exampleFiltersModel, (newVal) => { updateSelectedExampleFilters(newVal)}, 
       <ul class="flex gap-2">
         <li
           v-for="item of themeFilters"
-          :key="item"
+          :key="item.title"
         >
           <RouterLink
-            :to="item"
+            :to="item.title"
             :active-class="'!bg-indigo-200 !border-indigo-300'"
             class="uppercase inline-block select-none cursor-pointer px-2 py-1 rounded bg-red-200 border border-red-300"
           >
-            {{ item }}
+            {{ item.title }}
           </RouterLink>
         </li>
       </ul>
