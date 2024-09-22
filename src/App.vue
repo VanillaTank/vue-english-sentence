@@ -1,6 +1,6 @@
 <script setup>
-import VCardFilter from '@/components/vCardFilter.vue'
-import VCardList from '@/components/vCardList.vue'
+import VCardFilter from '@/layout/vCardFilter.vue'
+import VCardList from '@/layout/vCardList.vue'
 import VHowToUse from '@/components/vHowToUse.vue'
 </script>
 

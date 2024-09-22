@@ -8,7 +8,7 @@ const props = defineProps({
 })
 const { filter, color, modelValue } = toRefs(props)
 
-const emit = defineEmits(['change', 'update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
 const colors = {
   yellow: {
