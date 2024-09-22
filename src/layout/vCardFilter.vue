@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import { filters } from '@/data/index.js'
 import { useStore } from 'vuex'
-import VFiltersBlock from '@/components/icons/vFiltersBlock.vue'
+import VFiltersBlock from '@/components/vFiltersBlock.vue'
 
 const store = useStore()
 const cardFilters = ref([])

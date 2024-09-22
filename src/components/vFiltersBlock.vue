@@ -20,7 +20,6 @@ const filtersModel = ref({})
 const isInit = ref(false)
 
 watch(rawFilters, (newVal) => {
-  console.log('rawFilters changed - ', title)
   isInit.value = true // должен срабатывать, когда родитель вотчит смену фильтра темы и обновляет сырые фильтры
 
   filters.value = newVal.map((filter) => {
@@ -69,7 +68,3 @@ watch(filtersModel, (newVal) => {
     />
   </div>
 </template>
-
-<style scoped>
-
-</style>

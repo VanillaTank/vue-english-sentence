@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, toRefs, watch } from 'vue'
+import VTriangleIcon from '@/components/icons/vTriangleIcon.vue'
 
 const props = defineProps({
   filter: { type: Object },
@@ -14,16 +15,18 @@ const colors = {
   yellow: {
     headBg: 'bg-yellow-200',
     headBorder: 'border-yellow-400',
+    headTriangleFill: 'fill-yellow-500',
     bodyBg: 'bg-yellow-50',
-    bodyBorder: 'border-yellow-500',
+    bodyBorder: 'border-yellow-400',
     textDecoration: 'decoration-yellow-400',
     selectedDot: 'bg-yellow-800',
   },
   purple: {
     headBg: 'bg-purple-200',
     headBorder: 'border-purple-300',
+    headTriangleFill: 'fill-purple-500',
     bodyBg: 'bg-purple-50',
-    bodyBorder: 'border-purple-400',
+    bodyBorder: 'border-purple-300',
     textDecoration: 'decoration-purple-300',
     selectedDot: 'bg-purple-800',
   },
@@ -53,24 +56,33 @@ watch(modelValue, (value) => {
   filter.value.expanded = !!value.length
   selectedOptions.value = JSON.parse(JSON.stringify(value))
 }, {
-  immediate: true
+  immediate: true,
 })
 
 </script>
 
 <template>
   <div
-    class="select-none cursor-pointer px-2 py-1 rounded border"
+    class="select-none cursor-pointer px-2 py-1 rounded border flex items-center justify-between"
     :class="[colorDict.headBg, colorDict.headBorder]"
     @click.stop="filter.expanded = !filter.expanded"
   >
-    {{ filter.title }}
-    <span
-      v-if="filter.selectedOptionAmount"
-      class="opacity-80"
-    >
+    <div>
+      {{ filter.title }}
+      <span
+        v-if="filter.selectedOptionAmount"
+        class="opacity-80"
+      >
       ({{ filter.selectedOptionAmount }})
     </span>
+    </div>
+
+    <v-triangle-icon
+      :class="[
+        colorDict.headTriangleFill,
+        !filter.expanded ? 'rotate-180' : ''
+      ]"
+    />
   </div>
   <ul
     v-if="filter.expanded"
