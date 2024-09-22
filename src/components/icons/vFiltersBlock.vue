@@ -20,16 +20,19 @@ const filtersModel = ref({})
 const isInit = ref(false)
 
 watch(rawFilters, (newVal) => {
+  console.log('rawFilters changed - ', title)
   isInit.value = true // должен срабатывать, когда родитель вотчит смену фильтра темы и обновляет сырые фильтры
+
   filters.value = newVal.map((filter) => {
     const options = filter.options.map(opt => ({
       checked: false,
       ...opt,
     }))
+
     return {
       ...filter,
-      expanded: true, // todo Развернуть те, которые выбраны по дефолту
       selectedOptionAmount: 0,
+      expanded: false,
       options,
     }
   })

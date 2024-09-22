@@ -24,12 +24,12 @@ watch(
 
     if (newVal === 'times') {
       cardFilters.value = timesCardFilters
-      exampleFilters.value = exampleFilter
+      exampleFilters.value = JSON.parse(JSON.stringify(exampleFilter))
     }
 
     if (newVal === 'conditional') {
       cardFilters.value = conditionalCardFilters
-      exampleFilters.value = exampleFilter
+      exampleFilters.value = JSON.parse(JSON.stringify(exampleFilter))
     }
   },
 )
