@@ -27,11 +27,12 @@ watch(rawFilters, (newVal) => {
       checked: false,
       ...opt,
     }))
+    const expanded = !!selectedFiltersByDefault.value[filter.id]?.length
 
     return {
       ...filter,
       selectedOptionAmount: 0,
-      expanded: false,
+      expanded,
       options,
     }
   })
