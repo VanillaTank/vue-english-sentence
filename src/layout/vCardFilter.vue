@@ -8,8 +8,6 @@ const store = useStore()
 const cardFilters = ref([])
 const exampleFilters = ref([])
 const { themeFilters, timesCardFilters, conditionalCardFilters, exampleFilter } = filters
-const selectedFiltersByDefault = ref({})
-
 
 const selectedThemeFilter = computed(() => store.state.selectedThemeFilter)
 watch(
@@ -17,10 +15,6 @@ watch(
   (newVal) => {
     cardFilters.value = []
     exampleFilters.value = []
-
-    // todo Проверить, есть ли сохраненные в в рантайме фильтры, потом - локал сторадже фильтры.
-    //  Если нет - использовать дефолтные
-    selectedFiltersByDefault.value = themeFilters.find(theme => theme.title === selectedThemeFilter.value).selectedFiltersByDefault
 
     if (newVal === 'times') {
       cardFilters.value = timesCardFilters
@@ -62,8 +56,8 @@ watch(
       <v-filters-block
         color="yellow"
         title="card filter"
+        type="selectedCardFilters"
         updateStateActionName="updateSelectedCardFilters"
-        :selectedFiltersByDefault="selectedFiltersByDefault.selectedCardFilters || {}"
         :rawFilters="cardFilters"
       />
     </div>
@@ -73,8 +67,8 @@ watch(
       <v-filters-block
         color="purple"
         title="example filter"
+        type="selectedExampleFilters"
         updateStateActionName="updateSelectedExampleFilters"
-        :selectedFiltersByDefault="selectedFiltersByDefault.selectedExampleFilters || {}"
         :rawFilters="exampleFilters"
       />
   </div>

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.22",
+    "localforage": "^1.10.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
     "vuex": "^4.0.2"

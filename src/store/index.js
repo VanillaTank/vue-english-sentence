@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { timesCards, conditionalCards, filters } from '@/data'
+import { setLocalforage } from '@/storage/index.js'
 
 const { themeFilters } = filters
 
@@ -13,7 +14,7 @@ export default createStore({
     }
   },
   actions: {
-    updateSelectedThemeFilter({ commit }, payload) {
+    updateSelectedThemeFilter({ commit, dispatch }, payload) {
       commit('SET_SELECTED_THEME_FILTER', payload)
 
       const selectedThemeFilter = themeFilters.find(theme => theme.title === payload)
@@ -23,6 +24,7 @@ export default createStore({
       else if (selectedThemeFilter.title === 'conditional') { fullThemeCards = JSON.parse(JSON.stringify(conditionalCards)) }
 
       commit('SET_SELECTED_CARDS', fullThemeCards)
+      dispatch('updateLocalforage')
     },
     updateSelectedCardFilters({ state, commit, dispatch }, { filters, full = false }) {
       if (!full) {
@@ -32,6 +34,7 @@ export default createStore({
       } else {
         commit('SET_FULL_CARD_FILTER', filters)
       }
+      dispatch('updateLocalforage')
 
       const filtersKeys = Object.keys(state.selectedCardFilters)
       state.selectedCards.forEach(card => {
@@ -48,7 +51,7 @@ export default createStore({
         }
       })
     },
-    updateSelectedExampleFilters({ state, commit }, { filters, full = false }) {
+    updateSelectedExampleFilters({ state, commit, dispatch }, { filters, full = false }) {
       if (!full) {
         Object.keys(filters).forEach((filterId) => {
           commit('SET_SELECTED_EXAMPLE_FILTER', { filterId, data: filters[filterId] })
@@ -56,6 +59,7 @@ export default createStore({
       } else {
         commit('SET_FULL_EXAMPLE_FILTER', filters)
       }
+      dispatch('updateLocalforage')
 
       const filtersKeys = Object.keys(state.selectedExampleFilters)
 
@@ -90,6 +94,12 @@ export default createStore({
             return true
           })
         })
+    },
+    updateLocalforage({ state }) {
+      setLocalforage(state.selectedThemeFilter, JSON.stringify({
+        selectedCardFilters: state.selectedCardFilters,
+        selectedExampleFilters: state.selectedExampleFilters,
+      }))
     },
   },
   mutations: {

@@ -1,42 +1,56 @@
 <script setup>
 import VFilter from '@/components/vFilter.vue'
-import { ref, toRefs, watch } from 'vue'
+import { computed, ref, toRefs, watch } from 'vue'
 import { useStore } from 'vuex'
+import { getLocalforage } from '@/storage/index.js'
 
 const store = useStore()
+const selectedThemeFilter = computed(() => store.state.selectedThemeFilter)
 
 const props = defineProps({
-  title: { type: String, required: true, },
+  title: { type: String, required: true },
+  type: { type: String, required: true },
   color: { type: String, required: true, validator: (prop) => ['yellow', 'purple'].includes(prop) },
-  rawFilters: { type: Object, required: true, },
-  selectedFiltersByDefault: {type: Object, required: true },
-  updateStateActionName: { type: String, required: true, validator: (prop) => ['updateSelectedCardFilters', 'updateSelectedExampleFilters'].includes(prop) },
+  rawFilters: { type: Object, required: true },
+  updateStateActionName: {
+    type: String,
+    required: true,
+    validator: (prop) => ['updateSelectedCardFilters', 'updateSelectedExampleFilters'].includes(prop),
+  },
 })
-const { rawFilters, selectedFiltersByDefault } = toRefs(props)
-const { title, color, updateStateActionName  } = props
+const { rawFilters } = toRefs(props)
+const { title, color, updateStateActionName, type } = props
 
 const filters = ref([])
 const filtersModel = ref({})
 const isInit = ref(false)
 
+const selectedFiltersByDefault = ref({})
+
 watch(rawFilters, (newVal) => {
   isInit.value = true // должен срабатывать, когда родитель вотчит смену фильтра темы и обновляет сырые фильтры
 
-  filters.value = newVal.map((filter) => {
-    const options = filter.options.map(opt => ({
-      checked: false,
-      ...opt,
-    }))
-    const expanded = !!selectedFiltersByDefault.value[filter.id]?.length
+  getLocalforage(selectedThemeFilter.value)
+    .then(res => {
+      selectedFiltersByDefault.value = JSON.parse(res)[type]
 
-    return {
-      ...filter,
-      selectedOptionAmount: 0,
-      expanded,
-      options,
-    }
-  })
-  filtersModel.value = setFiltersModel(filters.value, selectedFiltersByDefault.value)
+      filters.value = newVal.map((filter) => {
+        const options = filter.options.map(opt => ({
+          checked: false,
+          ...opt,
+        }))
+
+        const expanded = !!selectedFiltersByDefault.value[filter.id]?.length
+
+        return {
+          ...filter,
+          selectedOptionAmount: 0,
+          expanded,
+          options,
+        }
+      })
+      filtersModel.value = setFiltersModel(filters.value, selectedFiltersByDefault.value)
+    })
 })
 
 function setFiltersModel(filters, selectedFilters) {
