@@ -23,6 +23,7 @@ import activePastPerfectContinuous from '@/data/cards/generalData/ActivePastPerf
 import activePresentPerfectContinuous from '@/data/cards/generalData/ActivePresentPerfectContinuous.js'
 import activeFuturePerfectContinuous from '@/data/cards/generalData/ActiveFuturePerfectContinuous.js'
 import zeroConditional from '@/data/cards/coditionalData/ZeroConditional.js'
+import zeroCondition from '@/data/cards/coditionalData/ZeroCondition.js'
 
 export const timesCards = [
   // Simple
@@ -48,4 +49,5 @@ export const timesCards = [
 
 export const conditionalCards = [
   zeroConditional,
+  zeroCondition,
 ]
