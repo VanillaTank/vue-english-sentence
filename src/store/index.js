@@ -1,8 +1,6 @@
 import { createStore } from 'vuex'
-import { timesCards, conditionalCards, filters } from '@/data'
+import { timesCards, conditionalCards } from '@/data'
 import { setLocalforage } from '@/storage/index.js'
-
-const { themeFilters } = filters
 
 export default createStore({
   state() {
@@ -14,17 +12,16 @@ export default createStore({
     }
   },
   actions: {
-    updateSelectedThemeFilter({ commit, dispatch }, payload) {
+    updateSelectedThemeFilter({ commit }, payload) {
+      if(!payload) return
+
       commit('SET_SELECTED_THEME_FILTER', payload)
 
-      const selectedThemeFilter = themeFilters.find(theme => theme.title === payload)
-
       let fullThemeCards
-      if (selectedThemeFilter.title === 'times') { fullThemeCards = JSON.parse(JSON.stringify(timesCards)) }
-      else if (selectedThemeFilter.title === 'conditional') { fullThemeCards = JSON.parse(JSON.stringify(conditionalCards)) }
+      if (payload === 'times') { fullThemeCards = JSON.parse(JSON.stringify(timesCards)) }
+      else if (payload === 'conditional') { fullThemeCards = JSON.parse(JSON.stringify(conditionalCards)) }
 
       commit('SET_SELECTED_CARDS', fullThemeCards)
-      dispatch('updateLocalforage')
     },
     updateSelectedCardFilters({ state, commit, dispatch }, { filters, full = false }) {
       if (!full) {

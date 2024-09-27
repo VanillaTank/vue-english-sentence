@@ -3,6 +3,7 @@ import VFilter from '@/components/vFilter.vue'
 import { computed, ref, toRefs, watch } from 'vue'
 import { useStore } from 'vuex'
 import { getLocalforage } from '@/storage/index.js'
+import themeFilters from '@/data/filters/themeFilters.js'
 
 const store = useStore()
 const selectedThemeFilter = computed(() => store.state.selectedThemeFilter)
@@ -32,7 +33,11 @@ watch(rawFilters, (newVal) => {
 
   getLocalforage(selectedThemeFilter.value)
     .then(res => {
-      selectedFiltersByDefault.value = JSON.parse(res)[type]
+      if (!res) {
+        selectedFiltersByDefault.value = themeFilters.find(({title}) => title === selectedThemeFilter.value).selectedFiltersByDefault[type]
+      } else {
+        selectedFiltersByDefault.value = JSON.parse(res)[type]
+      }
 
       filters.value = newVal.map((filter) => {
         const options = filter.options.map(opt => ({
@@ -51,7 +56,9 @@ watch(rawFilters, (newVal) => {
       })
       filtersModel.value = setFiltersModel(filters.value, selectedFiltersByDefault.value)
     })
-})
+},
+  { immediate: true }
+)
 
 function setFiltersModel(filters, selectedFilters) {
   const preparedFiltersModel = {}

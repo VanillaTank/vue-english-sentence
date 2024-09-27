@@ -26,6 +26,7 @@ watch(
       exampleFilters.value = JSON.parse(JSON.stringify(exampleFilter))
     }
   },
+  { immediate: true },
 )
 
 </script>
