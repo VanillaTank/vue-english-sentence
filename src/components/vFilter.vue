@@ -96,7 +96,6 @@ watch(modelValue, (value) => {
       @click="selectOption(option)"
     >
       <div
-        v-if="option.checked"
         class="mr-1 rounded-full border flex items-center justify-center"
         :class="[colorDict.headBg, colorDict.headBorder]"
         style="width: 15px; height: 15px"

@@ -59,17 +59,18 @@ const showFullTheory = ref(false)
         :key="Object.values(example.exampleFilter).join('-')"
         class="mb-3.5"
       >
-        <template v-if="example.show">
+        <div v-if="example.show" class="mb-2 border rounded border-lime-50 bg-lime-50 p-3">
+          <p class="mb-1 text-gray-600 text-sm"> {{ Object.values(example.exampleFilter).join(' - ') }} </p>
           <div
             v-for="(text, index) of example.texts"
             :key="index"
-            class="mb-2"
+            class="mb-1"
           >
             <p>{{ text.en }}</p>
             <p class="text-sm text-gray-800">{{ text.ru }}</p>
             <p v-if="text.comment" class="comment">{{ text.comment }}</p>
           </div>
-        </template>
+        </div>
       </div>
     </template>
   </div>
