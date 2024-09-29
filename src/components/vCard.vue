@@ -41,7 +41,7 @@ const showFullTheory = ref(false)
     <p
       v-for="(schema, index) of card.schemas"
       :key="index"
-      class="rounded py-2 px-3 bg-lime-100 mb-2.5 border border-lime-200"
+      class="rounded py-2 px-3 bg-lime-50 mb-2.5 border border-lime-200"
     >
       {{ schema }}
     </p>
@@ -59,7 +59,7 @@ const showFullTheory = ref(false)
         :key="Object.values(example.exampleFilter).join('-')"
         class="mb-3.5"
       >
-        <div v-if="example.show" class="mb-2 border rounded border-lime-50 bg-lime-50 p-3">
+        <div v-if="example.show" class="rounded py-2 px-3 bg-lime-50 mb-2 border border-lime-200">
           <p class="mb-1 text-gray-600 text-sm"> {{ Object.values(example.exampleFilter).join(' - ') }} </p>
           <div
             v-for="(text, index) of example.texts"
