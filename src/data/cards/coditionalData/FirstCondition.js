@@ -9,8 +9,8 @@ export default {
 <br />
 <div>Применяется для обсуждения ситуаций, в которых условия и результаты относятся к будущему. Первое условие говорит о том, что если определенное условие произойдет, то результат также вполне возможен.</div>`,
   schemas: [
-    'If + Present Simple (Subject + V1) + , + Subject (the same or another) + will + V1',
-    'If + Present Simple (Subject + do/does + not + V1) + , + Subject  (the same or another + will not + V1',
+    'If + Present Simple (subject + V1), + subject (the same or another) + will + V1',
+    'If + Present Simple (subject + do/does + not + V1), + subject (the same or another) + will not + V1',
   ],
   examples: [
     {
