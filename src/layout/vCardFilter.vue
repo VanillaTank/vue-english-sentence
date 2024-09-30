@@ -13,9 +13,6 @@ const selectedThemeFilter = computed(() => store.state.selectedThemeFilter)
 watch(
   selectedThemeFilter,
   (newVal) => {
-    cardFilters.value = []
-    exampleFilters.value = []
-
     if (newVal === 'times') {
       cardFilters.value = timesCardFilters
       exampleFilters.value = JSON.parse(JSON.stringify(exampleFilter))
@@ -26,9 +23,7 @@ watch(
       exampleFilters.value = JSON.parse(JSON.stringify(exampleFilter))
     }
   },
-  { immediate: true },
 )
-
 </script>
 
 <template>

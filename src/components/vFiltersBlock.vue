@@ -56,9 +56,7 @@ watch(rawFilters, (newVal) => {
       })
       filtersModel.value = setFiltersModel(filters.value, selectedFiltersByDefault.value)
     })
-},
-  { immediate: true }
-)
+})
 
 function setFiltersModel(filters, selectedFilters) {
   const preparedFiltersModel = {}
