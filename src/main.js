@@ -11,9 +11,13 @@ const app = createApp(App)
 app.use(router)
 app.use(store)
 
-const isLocalforageActual = await checkIfLocalforageActual()
-if (!isLocalforageActual) {
-  setDefaultLocalforageFilters()
+try {
+  const isLocalforageActual = await checkIfLocalforageActual()
+  if (!isLocalforageActual) {
+    setDefaultLocalforageFilters()
+  }
+} catch (e) {
+  console.log(e)
 }
 
 app.mount('#app')
