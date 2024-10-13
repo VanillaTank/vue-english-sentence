@@ -25,6 +25,7 @@ import activeFuturePerfectContinuous from '@/data/cards/generalData/ActiveFuture
 import zeroCondition from '@/data/cards/coditionalData/ZeroCondition.js'
 import firstCondition from '@/data/cards/coditionalData/FirstCondition.js'
 import secondCondition from '@/data/cards/coditionalData/SecondCondition.js'
+import thirdCondition from '@/data/cards/coditionalData/ThirdCondition.js'
 
 export const timesCards = [
   // Simple
@@ -52,4 +53,5 @@ export const conditionalCards = [
   zeroCondition,
   firstCondition,
   secondCondition,
+  thirdCondition,
 ]
