@@ -60,7 +60,7 @@ export default createStore({
 
       const filtersKeys = Object.keys(state.selectedExampleFilters)
 
-      if (!filtersKeys.length || Object.values(state.selectedExampleFilters).every(arr => !arr.length)) {
+      if (!filtersKeys.length || Object.values(state.selectedExampleFilters).every(arr => !arr.value.length)) {
         state.selectedCards.forEach(card => card.examples.forEach(example => example.show = false))
         return
       }
@@ -68,9 +68,9 @@ export default createStore({
       state.selectedCards.forEach((card) => {
         if (card.show) {
           card.examples.forEach((example) => {
-              example.show = filtersKeys.every(fKey => {
-                if (state.selectedExampleFilters[fKey].length) {
-                  return state.selectedExampleFilters[fKey].includes(example.exampleFilter[fKey])
+            example.show = filtersKeys.every(fKey => {
+                if (state.selectedExampleFilters[fKey].value.length) {
+                  return state.selectedExampleFilters[fKey].value.includes(example.exampleFilter[fKey])
                 }
                 return true
               })
@@ -85,8 +85,8 @@ export default createStore({
         .find(card => card.id === cardId).examples
         .forEach((example) => {
           example.show = filtersKeys.every(fKey => {
-            if (state.selectedExampleFilters[fKey].length) {
-              return state.selectedExampleFilters[fKey].includes(example.exampleFilter[fKey])
+            if (state.selectedExampleFilters[fKey].value.length) {
+              return state.selectedExampleFilters[fKey].value.includes(example.exampleFilter[fKey])
             }
             return true
           })
