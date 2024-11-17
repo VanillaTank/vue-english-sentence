@@ -36,27 +36,32 @@ const colorDict = computed(() => colors[color.value])
 const selectedOptions = ref([])
 
 const selectOption = (option) => {
-  const index = selectedOptions.value.indexOf(option.value)
+  const index = selectedOptions.value.value.indexOf(option.value)
   index === -1
-    ? selectedOptions.value.push(option.value)
-    : selectedOptions.value.splice(index, 1)
+    ? selectedOptions.value.value.push(option.value)
+    : selectedOptions.value.value.splice(index, 1)
 
-  emit('update:modelValue', selectedOptions.value)
+  emit('update:modelValue', { expended: selectedOptions.value.expended,  value: selectedOptions.value.value })
 }
 
 watch(modelValue, (value) => {
   const clonedOptions = JSON.parse(JSON.stringify(filter.value.options))
 
   clonedOptions.forEach((option) => {
-    option.checked = value.includes(option.value)
+    option.checked = value.value.includes(option.value)
   })
 
   filter.value.options = clonedOptions
   filter.value.selectedOptionAmount = value.length
+  filter.value.expended = value.expended
   selectedOptions.value = JSON.parse(JSON.stringify(value))
 }, {
   immediate: true,
 })
+
+const changeExpended = () => {
+  emit('update:modelValue', { expended: !filter.value.expended,  value: modelValue.value.value })
+}
 
 </script>
 
@@ -64,7 +69,7 @@ watch(modelValue, (value) => {
   <div
     class="select-none cursor-pointer px-2 py-1 rounded border flex items-center justify-between"
     :class="[colorDict.headBg, colorDict.headBorder]"
-    @click.stop="filter.expanded = !filter.expanded"
+    @click.stop="changeExpended"
   >
     <div>
       {{ filter.title }}
@@ -79,12 +84,12 @@ watch(modelValue, (value) => {
     <v-triangle-icon
       :class="[
         colorDict.headTriangleFill,
-        !filter.expanded ? 'rotate-180' : ''
+        !filter.expended ? 'rotate-180' : ''
       ]"
     />
   </div>
   <ul
-    v-if="filter.expanded"
+    v-if="filter.expended"
     class="p-2 border rounded-b border-t-0 mt-[-2px]"
     :class="[colorDict.bodyBg, colorDict.bodyBorder]"
   >
@@ -96,13 +101,13 @@ watch(modelValue, (value) => {
       @click="selectOption(option)"
     >
       <div
-        class="mr-1 rounded-full border flex items-center justify-center"
+        class="mr-1 rounded-sm border flex items-center justify-center"
         :class="[colorDict.headBg, colorDict.headBorder]"
         style="width: 15px; height: 15px"
       >
         <div
           v-if="option.checked"
-          class="rounded-full border"
+          class="rounded-sm border"
           :class="[colorDict.selectedDot]"
           style="width: 9px; height: 9px"
         ></div>

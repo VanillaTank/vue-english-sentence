@@ -45,7 +45,7 @@ watch(rawFilters, (newVal) => {
           ...opt,
         }))
 
-        const expanded = !!selectedFiltersByDefault.value[filter.id]?.length
+        const expanded = selectedFiltersByDefault.value[filter.id]?.expended
 
         return {
           ...filter,

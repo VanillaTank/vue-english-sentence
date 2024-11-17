@@ -33,7 +33,7 @@ watch(
       class="border bg-white rounded sm:p-2 p-1.5 v-shadow sm:w-full hover:bg-soft-pink sm:hidden"
       @click="open = !open"
     >
-      Filters
+      {{ open ? 'Hide filters' : 'Filters' }}
     </button>
 
     <div
