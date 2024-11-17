@@ -7,7 +7,7 @@ const open = ref(false)
 
 <template>
   <button
-    class="mb-4 border bg-white rounded p-2 v-shadow w-full hover:bg-soft-pink"
+    class="sm:mb-4 border bg-white rounded sm:p-2 p-1.5 v-shadow sm:w-full hover:bg-soft-pink"
     @click="open = true"
   >
     How to use?

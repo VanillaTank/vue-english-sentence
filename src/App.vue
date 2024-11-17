@@ -5,13 +5,14 @@ import VHowToUse from '@/components/vHowToUse.vue'
 </script>
 
 <template>
-  <main class="h-screen w-full p-3 overflow-hidden main bg-no-repeat bg-center bg-cover">
-    <div class="max-w-[1200px] mx-auto flex h-full">
-      <div class="w-1/4 max-h-full overflow-auto rounded scroll-style scroll-pink pr-1">
+  <div class="bgi bg-no-repeat bg-[center_-80px] sm:bg-center bg-auto sm:bg-cover h-[115%] sm:h-full w-full fixed top-0 left-0 -z-10 bg-scroll"></div>
+  <main class="h-screen w-full p-3 sm:overflow-hidden">
+    <div class="max-w-[1200px] mx-auto sm:flex sm:h-full">
+      <div class="sm:w-1/4 w-full max-h-full overflow-auto sm:rounded scroll-style scroll-pink sm:pr-1 fixed top-0 left-0 p-2.5 sm:static flex sm:block justify-between bgi bg-no-repeat bg-[center_-80px] bg-auto sm:!bg-none sm:!bg-transparent">
         <v-how-to-use />
         <v-card-filter />
       </div>
-      <div class="w-3/4">
+      <div class="sm:w-3/4 mt-[55px] sm:mt-0">
         <v-card-list />
       </div>
     </div>
@@ -19,7 +20,7 @@ import VHowToUse from '@/components/vHowToUse.vue'
 </template>
 
 <style scoped>
-.main {
+.bgi {
   background-image: url('@/assets/bgk.jpg');
   background-color: #D5C1CC;
 }

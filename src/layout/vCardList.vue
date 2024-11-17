@@ -9,7 +9,7 @@ const cards = computed(() => store.state.selectedCards)
 </script>
 
 <template>
-  <div class="max-h-full overflow-auto rounded scroll-style scroll-pink pl-5 pr-2 flex flex-col gap-y-4">
+  <div class="max-h-full overflow-auto rounded scroll-style scroll-pink sm:pl-5 sm:pr-2 flex flex-col gap-y-4">
     <div
       v-if="cards.every(card => !card.show)"
       class="text-sm text-gray-800 border bg-white rounded p-4 v-shadow card"

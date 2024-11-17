@@ -27,7 +27,14 @@ watch(
 </script>
 
 <template>
-  <div class="border bg-white rounded p-2 v-shadow">
+<!-- todo @click="open = true" -->
+  <button
+    class="sm:mb-4 border bg-white rounded sm:p-2 p-1.5 v-shadow sm:w-full hover:bg-soft-pink sm:hidden"
+  >
+    Filters
+  </button>
+
+  <div class="border bg-white rounded p-2 v-shadow sm:block hidden">
     <!-- THEME FILTER -->
     <div class="p-2">
       <h6 class="font-light	mb-2">theme filter</h6>
