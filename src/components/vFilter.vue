@@ -52,7 +52,7 @@ watch(modelValue, (value) => {
   })
 
   filter.value.options = clonedOptions
-  filter.value.selectedOptionAmount = value.length
+  filter.value.selectedOptionAmount = value.value.length
   filter.value.expended = value.expended
   selectedOptions.value = JSON.parse(JSON.stringify(value))
 }, {
