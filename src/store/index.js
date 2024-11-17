@@ -38,8 +38,8 @@ export default createStore({
         const prevShow = card.show
         card.show = filtersKeys.every(fKey => {
           // eslint-disable-next-line no-prototype-builtins
-          if (state.selectedCardFilters[fKey].length) {
-            return state.selectedCardFilters[fKey].includes(card.cardFilter[fKey])
+          if (state.selectedCardFilters[fKey].value.length) {
+            return state.selectedCardFilters[fKey].value.includes(card.cardFilter[fKey])
           }
           return true
         })
