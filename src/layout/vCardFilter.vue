@@ -2,10 +2,11 @@
 import { computed, ref, watch } from 'vue'
 import { filters } from '@/data/index.js'
 import { useStore } from 'vuex'
+import { clickOutside as vClickOutside } from '@/directives/clickOutside'
 import VFiltersBlock from '@/components/vFiltersBlock.vue'
 
 const store = useStore()
-const open = ref(false)
+const isOpen = ref(false)
 const cardFilters = ref([])
 const exampleFilters = ref([])
 const { themeFilters, timesCardFilters, conditionalCardFilters, exampleFilter } = filters
@@ -25,23 +26,31 @@ watch(
     }
   },
 )
+const close = () => {
+  if (isOpen.value) {
+    isOpen.value = false
+  }
+}
+
+
 </script>
 
 <template>
   <div class="relative">
     <button
       class="border bg-white rounded sm:p-2 p-1.5 v-shadow sm:w-full hover:bg-soft-pink sm:hidden"
-      @click="open = !open"
+      @click.stop="isOpen = !isOpen.value"
     >
-      {{ open ? 'Hide filters' : 'Filters' }}
+      {{ isOpen ? 'Hide filters' : 'Filters' }}
     </button>
 
     <div
       class="border bg-white rounded p-2 v-shadow sm:block fixed right-3 sm:static mt-0.5 sm:mt-0 overflow-auto sm:overflow-visible h-[90%] sm:h-auto"
       :class="{
-        'hidden': !open,
-        'block': open
+        'hidden': !isOpen,
+        'block': isOpen
       }"
+      v-click-outside="close"
     >
       <!-- THEME FILTER -->
       <div class="p-2">
