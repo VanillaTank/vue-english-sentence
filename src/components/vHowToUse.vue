@@ -21,7 +21,7 @@ const open = ref(false)
     @ok="open = false"
   >
     <div class="mb-1">
-      1. Выберете тему.
+      1. Выберете тему в фильтре тем.
       <div class="text-sm">Например, times.</div>
     </div>
     <div class="mb-1">
