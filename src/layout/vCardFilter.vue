@@ -39,7 +39,7 @@ const close = () => {
   <div class="relative">
     <button
       class="border bg-white rounded sm:p-2 p-1.5 v-shadow sm:w-full hover:bg-soft-pink sm:hidden"
-      @click.stop="isOpen = !isOpen.value"
+      @click.stop="isOpen = !isOpen"
     >
       {{ isOpen ? 'Hide filters' : 'Filters' }}
     </button>
